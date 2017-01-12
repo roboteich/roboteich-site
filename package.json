@@ -1,0 +1,46 @@
+{
+  "name": "roboteich-site",
+  "version": "1.0.0",
+  "description": "Website home of Ross Teichner - Creative Technologist",
+  "main": "app/scripts/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roboteich/roboteich-site.git"
+  },
+  "keywords": [
+    "Portfolio"
+  ],
+  "author": "Ross Teichner",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/roboteich/roboteich-site/issues"
+  },
+  "homepage": "https://github.com/roboteich/roboteich-site#readme",
+  "devDependencies": {
+    "babelify": "^7.3.0",
+    "browser-sync": "^2.18.6",
+    "browserify": "^13.3.0",
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-cssnano": "^2.1.2",
+    "gulp-eslint": "^3.0.1",
+    "gulp-html-replace": "^1.6.2",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-sass-glob": "^1.0.8",
+    "gulp-sourcemaps": "^2.3.1",
+    "gulp-uglify": "^2.0.0",
+    "gulp-util": "^3.0.8",
+    "include-media": "^1.4.9",
+    "normalize-scss": "^6.0.0",
+    "run-sequence": "^1.2.2",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "dependencies": {
+  }
+}

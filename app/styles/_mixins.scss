@@ -1,0 +1,65 @@
+@import include-media;
+
+//
+// Grid
+//-----------------------------------------------------------------------------
+
+@mixin make-ratio-grid($class, $ratio, $cols){
+
+  /*
+     Row with #{$cols} columns
+  ------------------------------------------ */
+
+ // Define first value in cols map
+ $colsmap: (
+  1: 1
+ );
+
+ // Start the total value of all cols
+ $cols-total: 1;
+
+ // Add values for each col to $colsmap
+ @for $i from 2 through $cols {
+   // value of this col is the prev * ratio
+  $new-col-val: map-get($colsmap, $i - 1)*$ratio;
+  $colsmap: map-merge($colsmap, ($i: $new-col-val));
+  $cols-total: $cols-total + $new-col-val;
+ }
+
+ // return widths for each column
+ @each $col, $value in $colsmap {
+   .col-#{$class}-#{$col}-#{$cols} {
+      width: ($value/$cols-total)*100%;
+    }
+ }
+
+} // ratio-row
+
+
+@mixin make-ratio-grid($class, $ratio, $cols) {
+  /*
+    #{$ratio} grid
+    Ratio grid using #{$ratio} and a max of #{$cols} cols
+  ------------------------------------------ */
+  @for $i from 2 through $cols {
+    @include ratio-row($class, $ratio, $i);
+  }
+
+} // ratio-grid
+
+//
+// Utilities
+//-----------------------------------------------------------------------------
+
+@mixin clearfix() {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+  // For IE 6/7 (trigger hasLayout)s
+  zoom: 1;
+}
