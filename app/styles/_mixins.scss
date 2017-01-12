@@ -31,10 +31,31 @@
   $cols-total: $cols-total + $new-col-val;
  }
 
+$colwidthsmap: (
+  1:null
+);
  // return widths for each column
- @each $col, $value in $colsmap {
-   .col-#{$class}-#{$col}-#{$cols} {
-      width: ($value/$cols-total)*100%;
+ @for $i from 1 through $cols {
+   $value: map-get($colsmap, $i);
+   $colwidth: ($value/$cols-total)*100%;
+   $colwidthsmap: map-merge($colwidthsmap, ($i: $colwidth));
+
+   .col-#{$class}-#{$i}-#{$cols} {
+      width: $colwidth;
+    }
+ }
+
+$colspans: $cols - 1;
+
+ @for $i from 1 through $colspans {
+    $ipp: $i + 1;
+    $nextcol: $cols + $i;
+    @debug $nextcol;
+    $nextcolwidth: map-get($colwidthsmap, $nextcol - 1) + map-get($colwidthsmap, $cols - $i);
+    $colwidthsmap: map-merge($colwidthsmap, ($nextcol: $nextcolwidth));
+
+   .col-#{$class}-#{$nextcol}-#{$cols} {
+      width: $nextcolwidth;
     }
  }
 
