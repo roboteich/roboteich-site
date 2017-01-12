@@ -1,10 +1,10 @@
-@import include-media;
+@import "include-media";
 
 //
 // Grid
 //-----------------------------------------------------------------------------
 
-@mixin make-ratio-grid($class, $ratio, $cols){
+@mixin make-ratio-row($class, $ratio, $cols){
 
   /*
      Row with #{$cols} columns
@@ -42,7 +42,7 @@
     Ratio grid using #{$ratio} and a max of #{$cols} cols
   ------------------------------------------ */
   @for $i from 2 through $cols {
-    @include ratio-row($class, $ratio, $i);
+    @include make-ratio-row($class, $ratio, $i);
   }
 
 } // ratio-grid

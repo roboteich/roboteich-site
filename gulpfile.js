@@ -55,7 +55,7 @@ var filePaths = {
     },
     config: { browserSync: "./app/scripts/config/development.js" },
     styles: {
-      entry: "./app/styles/styles.scss",
+      entry: "./app/styles/main.scss",
       all: "./app/styles/**/*.scss",
       vendor: [],
       bundled: "styles.min.css"
@@ -64,11 +64,11 @@ var filePaths = {
     public: { all: "./app/public/**/*" }
   },
   dest: {
-    build: "dist",
-    scripts: "dist/js",
-    styles: "dist/css",
+    build: "./dist",
+    scripts: "./dist/js",
+    styles: "./dist/css",
     public: { all: "dist/assets" },
-    templates: "dist"
+    templates: "./dist"
   }
 };
 
@@ -128,10 +128,10 @@ gulp.task("build:styles", function() {
     .pipe(sassGlob())
     .pipe(
       sass({
-        outputStyle: "compressed",
+        outputStyle: "nested",
         includePaths: [
           filePaths.src.styles.all,
-          "node_modules/normalize-scss/sass",
+          "node_modules/normalize-scss/sass/",
           "node_modules/include-media/dist/"
         ]
       }).on("error", sass.logError)
@@ -157,8 +157,8 @@ gulp.task("build:templates", function() {
     .src(filePaths.src.templates.entry)
     .pipe(
       htmlreplace({
-        css: filePaths.dest.styles + "/" + filePaths.src.styles.bundled,
-        js: filePaths.dest.scripts + "/" + filePaths.src.scripts.bundled,
+        css: "css/" + filePaths.src.styles.bundled,
+        js: "js/" + filePaths.src.scripts.bundled,
         config: {
           src: gulp.src(filePaths.src.config.browserSync),
           tpl: "<script type=\"text/javascript\">\n%s</script>"
@@ -187,8 +187,8 @@ gulp.task("reload:templates", [ "build:templates" ], browserSync.reload);
 //   }, done);
 // });
 // cleanup
-gulp.task("clean", function(cb) {
-  return del.sync([ filePaths.dest.build + "/**/*.*" ], cb);
+gulp.task("clean", function() {
+  del.sync([ filePaths.dest.build + "/**/*.*" ]);
 });
 
 // preview
@@ -196,7 +196,7 @@ gulp.task("browser-sync", function() {
   browserSync({
     logConnections: true,
     open: "external",
-    server: { baseDir: filePaths.dest.template },
+    server: { baseDir: filePaths.dest.templates },
     port: process.env.PORT || 9000,
     xip: true
   });

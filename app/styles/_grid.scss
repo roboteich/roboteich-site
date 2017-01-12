@@ -31,28 +31,29 @@
 
   > * {
     padding: $grid-padding*3;
+    background-color: $color-primary;
   }
 }
 
 // xs grid
-@include make-ratio-columns(xs);
+@include make-ratio-grid(xs, $ratio-golden, $grid-cols);
 
 // sm grid
 @include media('>=sm') {
-  @include make-ratio-columns(sm);
+  @include make-ratio-grid(sm, $ratio-golden, $grid-cols);
 }
 
 // md grid
 @include media('>=md') {
-  @include make-ratio-columns(md);
+  @include make-ratio-grid(md, $ratio-golden, $grid-cols);
 }
 
 // lg grid
 @include media('>=lg') {
-  @include make-ratio-columns(lg);
+  @include make-ratio-grid(lg, $ratio-golden, $grid-cols);
 }
 
 // xl grid
 @include media('>=xl') {
-  @include make-ratio-columns(xl);
+  @include make-ratio-grid(xl, $ratio-golden, $grid-cols);
 }
