@@ -137,9 +137,6 @@ gulp.task("build:styles", function() {
       }).on("error", sass.logError)
     )
     .pipe(autoprefixer())
-    .pipe(
-      cssnano({ autoprefixer: false, discardComments: { removeAll: true } })
-    )
     .pipe(rename(filePaths.src.styles.bundled))
     .pipe(gulp.dest(filePaths.dest.styles));
 });

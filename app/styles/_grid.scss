@@ -16,21 +16,21 @@
   @include clearfix;
   display: block;
   margin: 0 -$grid-padding;
-  padding-bottom: $grid-padding*2;
 }
 
 // Column
 .col {
   position: relative;
   display: block;
-  padding-bottom: 2*$grid-padding;
+  //padding-bottom: 2*$grid-padding;
   @include media('>xs') {
     float: left;
-    padding: 0 $grid-padding 2*$grid-padding;
+    //padding: 0 $grid-padding 2*$grid-padding;
+    border: $grid-padding solid $color-secondary;
   }
 
   > * {
-    padding: $grid-padding*3;
+    //padding: $grid-padding*3;
     background-color: $color-primary;
   }
 }
