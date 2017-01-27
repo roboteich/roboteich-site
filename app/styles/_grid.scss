@@ -4,48 +4,40 @@
 
 // Container
 .container {
-  margin-left: 0;
-  margin-right: 0;
-  padding-left: $grid-padding;
-  padding-right: $grid-padding;
-  @include clearfix;
+
 }
 
 // Row
 .row {
-  @include clearfix;
-  display: block;
-  margin: 0 0-$grid-padding;
-  padding-bottom: $grid-padding* 2;
+  display: flex;
+
+  width: 100%;
 }
 
 // Column
 .col {
-  position: relative;
-  display: block;
-  width: 100%;
 
-  //padding-bottom: 2*$grid-padding;
-  @include media('>xs') {
-    float: left;
+  display:flex;
+  flex:0 1 0%;
+  flex-flow: column nowrap;
+
+  .cell {
     padding:0 $grid-padding;
   }
 
-  > * {
-    text-align: center;
-    padding: $grid-padding*3 0;
-    background-color: $color-primary;
-  }
 }
 
 // xs grid
-@include media('>=xs') {
-  @include make-ratio-grid(xs, $ratio-golden, $grid-cols);
-}
+@include make-ratio-grid(xs, $ratio-golden, $grid-cols);
 
 // sm grid
 @include media('>=sm') {
   @include make-ratio-grid(sm, $ratio-golden, $grid-cols);
+}
+
+// smd grid
+@include media('>=smd') {
+  @include make-ratio-grid(smd, $ratio-golden, $grid-cols);
 }
 
 // md grid

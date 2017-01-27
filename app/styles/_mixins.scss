@@ -40,8 +40,18 @@ $colwidthsmap: (
    $colwidth: ($value/$cols-total)*100%;
    $colwidthsmap: map-merge($colwidthsmap, ($i: $colwidth));
 
-   .col-#{$class}-#{$i}-#{$cols} {
-      width: $colwidth;
+   .col-#{$class}-ltr-#{$i}-#{$cols}, .col-#{$class}-rtl-#{$i}-#{$cols} {
+      min-width: $colwidth;
+      &.col-grow {
+        height:100%;
+      }
+    }
+
+    .col-#{$class}-ttb-#{$i}-#{$cols}, .col-#{$class}-btt-#{$i}-#{$cols} {
+      min-height: $colwidth;
+      &.col-grow {
+        width:100%;
+      }
     }
  }
 
@@ -50,12 +60,21 @@ $colspans: $cols - 1;
  @for $i from 1 through $colspans {
     $ipp: $i + 1;
     $nextcol: $cols + $i;
-    @debug $nextcol;
     $nextcolwidth: map-get($colwidthsmap, $nextcol - 1) + map-get($colwidthsmap, $cols - $i);
     $colwidthsmap: map-merge($colwidthsmap, ($nextcol: $nextcolwidth));
 
-   .col-#{$class}-#{$nextcol}-#{$cols} {
-      width: $nextcolwidth;
+   .col-#{$class}-ltr-#{$nextcol}-#{$cols}, .col-#{$class}-rtl-#{$nextcol}-#{$cols} {
+     min-width: $nextcolwidth;
+     &.col-grow {
+       height:100%;
+     }
+    }
+
+    .col-#{$class}-btt-#{$nextcol}-#{$cols}, .col-#{$class}-ttb-#{$nextcol}-#{$cols} {
+      min-width: $nextcolwidth;
+      &.col-grow {
+        width:100%;
+      }
     }
  }
 
@@ -67,6 +86,35 @@ $colspans: $cols - 1;
     #{$ratio} grid
     Ratio grid using #{$ratio} and a max of #{$cols} cols
   ------------------------------------------ */
+
+  .row-#{$class}-ltr, .row-#{$class}-rtl  {
+    flex-flow:row wrap;
+    width:100%;
+    height:unset;
+
+    &.row-grow {
+      height:100%;
+    }
+  }
+
+  .row-#{$class}-rtl, .row-#{$class}-btt {
+    justify-content: flex-end;
+  }
+
+  .row-#{$class}-ltr, .row-#{$class}-ttb {
+    justify-content: flex-start;
+  }
+
+  .row-#{$class}-ttb, .row-#{$class}-btt {
+    flex-flow:column wrap;
+    height:100%;
+    width:unset;
+
+    &.row-grow {
+      width:100%;
+    }
+  }
+
   @for $i from 2 through $cols {
     @include make-ratio-row($class, $ratio, $i);
   }

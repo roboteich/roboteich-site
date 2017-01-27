@@ -61,13 +61,13 @@ var filePaths = {
       bundled: "styles.min.css"
     },
     templates: { entry: "./app/templates/index.html" },
-    public: { all: "./app/public/**/*" }
+    public: { all: "./app/public/**/*.*" }
   },
   dest: {
     build: "./dist",
     scripts: "./dist/js",
     styles: "./dist/css",
-    public: { all: "dist/assets" },
+    public: { all: "dist" },
     templates: "./dist"
   }
 };
@@ -100,23 +100,6 @@ gulp.task("build:scripts", function() {
     })
     .pipe(source(filePaths.src.scripts.bundled))
     .pipe(buffer())
-    .pipe(
-      uglify({
-        mangle: true,
-        compress: {
-          sequences: true,
-          dead_code: true,
-          comparisons: true,
-          conditionals: true,
-          booleans: true,
-          negate_iife: true,
-          unused: true,
-          if_return: true,
-          join_vars: true,
-          drop_console: false
-        }
-      })
-    )
     .pipe(sourcemaps.write("./"))
     .pipe(gulp.dest(filePaths.dest.scripts));
 });
