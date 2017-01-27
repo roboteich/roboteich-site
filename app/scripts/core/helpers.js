@@ -58,7 +58,9 @@ function elementCreationHelper(element) {
 }
 
 module.exports = {
-  getUA: () => window.navigator.userAgent,
+  getUA: function getUA() {
+    return window.navigator.userAgent;
+  },
   isIPad: function isIPad() {
     var ua = this.getUA();
     ua.match(/iPad/i);

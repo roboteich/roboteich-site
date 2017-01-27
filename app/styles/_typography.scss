@@ -27,6 +27,12 @@ h1, .h1 {
   font-size: 6.854rem;
 }
 
+@include media("<sm") {
+  h1, .h1 {
+    font-size: 5.75rem;
+  }
+}
+
 h2, .h2 {font-size: 4.236rem;}
 
 h3, .h3 {
