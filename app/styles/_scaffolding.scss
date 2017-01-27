@@ -61,9 +61,21 @@ body {
   width:100%;
 }
 
+#site-footer {
+  position:absolute;
+  margin:0 auto;
+  bottom:10%;
+}
+
 #site-main-body {
   opacity:0;
   transition: opacity .65s;
+  transition-delay: 1s;
+}
+
+#site-main-heading {
+  position:absolute;
+  top:$grid-padding * 3;
 }
 
 .wf-active #site-main-body {
@@ -79,9 +91,27 @@ body {
   #site-header {
     min-width: 52px;
     height:100%;
+    text-align: left;
   }
+
+  #site-main-heading {
+    text-align: left;
+    left:$grid-padding * 3;
+    bottom:$grid-padding * 5;
+  }
+
   #site-main {
     height:100%;
+  }
+
+  #site-main-heading {
+    transform:translate3d(0, 33%, 0);
+  }
+
+  #site-footer {
+    position:absolute;
+    right:0;
+    top:0;
   }
 }
 
@@ -123,12 +153,19 @@ body {
   transform: translate(-50%, -50%);
   display:block;
   z-index:1;
+  opacity:0;
+  transition: opacity 1s ease-in-out;
+  &.active {
+    opacity: 1;
+  }
 }
 
 @supports(mix-blend-mode: overlay) {
   #site-main-hero .site-reel-video {
     mix-blend-mode: overlay;
-    opacity:.7;
+    &.active {
+      opacity:.5;
+    }
     z-index:2;
   }
   #site-main-hero::before {
@@ -159,10 +196,37 @@ body {
   }
 }
 
-#social-link-list .btn-social {
-  display: block;
-  width:25px;
-  height:25px;
-  background: transparent url('../img/social-icons.svg') left top no-repeat;
-  background-size:33% 33%;
+#social-link-list {
+
+  margin: 28px 12px;
+
+  .btn-social {
+    display: block;
+    width:32px;
+    height:0;
+    padding-top:32px;
+    margin:0 8px;
+    overflow:hidden;
+    background: transparent url('../img/social-icons.svg') left top no-repeat;
+    background-size:300% 100%;
+    opacity:.75;
+    transition: opacity .45s ease-in-out;
+
+    &:hover {
+      opacity:1;
+    }
+
+    &.btn-social-linkedin {
+      background-position:0% top;
+    }
+
+    &.btn-social-twitter {
+      background-position:50% top;
+    }
+
+    &.btn-social-instagram {
+      background-position:100% top;
+    }
+  }
+
 }

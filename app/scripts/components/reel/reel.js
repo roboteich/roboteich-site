@@ -3,7 +3,6 @@ var component = require("../../core/component");
 var assign = require("object-assign");
 var helpers = require("../../core/helpers");
 var e = helpers.e;
-var PIXI = require("pixi.js");
 
 var defaultOptions = { reelSrc: "/video/project-reel.mp4", scaleMode: "cover" };
 
@@ -15,12 +14,12 @@ function reelFactory(el, instanceOptions) {
   var videoSprite;
   var video;
   var playing = false;
+  var videoUpdateAction;
 
   var reelComponent = component.create({
     defaultProps: { autoplay: true },
     initialize: function(options) {
       settings = assign({}, defaultOptions, options);
-      console.log("initialize: ", PIXI);
     },
     createChildren: function() {
       // renderer = PIXI.autoDetectRenderer(
@@ -63,7 +62,9 @@ function reelFactory(el, instanceOptions) {
     },
     didDraw: function() {},
     ready: function() {
+      var videoUpdateAction = handleVideoUpdate.bind(this);
       video.el().addEventListener("ended", handleVideoEnd.bind(this));
+      video.el().addEventListener("timeupdate", videoUpdateAction);
 
       if (this.getProps().autoplay) {
         this.play();
@@ -89,6 +90,14 @@ function reelFactory(el, instanceOptions) {
   function handleVideoEnd(e) {
     video.el().currentTime = 0;
     video.el().play();
+  }
+
+  function handleVideoUpdate(e) {
+    var videoEl = video.el();
+    if (videoEl.currentTime > 0) {
+      videoEl.removeEventListener("timeupdate", videoUpdateAction);
+      videoEl.classList.add("active");
+    }
   }
 
   return reelComponent(el, instanceOptions);
