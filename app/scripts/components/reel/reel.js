@@ -37,6 +37,7 @@ function reelFactory(el, instanceOptions) {
         .attr("height", 720)
         .attr("playsinline", "")
         .attr("autoplay", "")
+        .attr("preload", "auto")
         .attr("muted", "");
 
       // texture = PIXI.Texture.fromVideoUrl(settings.reelSrc);
@@ -53,13 +54,17 @@ function reelFactory(el, instanceOptions) {
       var videoEl = video.el();
       var el = this.getEl();
       var scale = Math.max(el.offsetWidth / 1280, el.offsetHeight / 720);
-      videoEl.width = 1280 * scale;
-      videoEl.height = 720 * scale;
+      videoEl.style.transform = "translate3d(-50%, -50%, 0) scale3d(" + scale +
+        "," +
+        scale +
+        ",1)";
 
       console.log("draw");
     },
     didDraw: function() {},
     ready: function() {
+      video.el().addEventListener("ended", handleVideoEnd.bind(this));
+
       if (this.getProps().autoplay) {
         this.play();
       }
@@ -79,6 +84,11 @@ function reelFactory(el, instanceOptions) {
 
   function handleResize() {
     this.invalidate();
+  }
+
+  function handleVideoEnd(e) {
+    video.el().currentTime = 0;
+    video.el().play();
   }
 
   return reelComponent(el, instanceOptions);

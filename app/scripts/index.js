@@ -17,11 +17,10 @@ var createReelComponent = require("./components/reel/reel");
     findEls();
     createChildren();
     loadAssets();
-    console.log("main");
   }
 
   function findEls() {
-    reelContainerEl = _document.getElementById("site-reel-viewport");
+    reelContainerEl = _document.getElementById("site-main-hero");
   }
 
   function createChildren() {
@@ -33,7 +32,7 @@ var createReelComponent = require("./components/reel/reel");
   }
 
   function loadFonts() {
-    fonts.load({ google: { families: [ "Open Sans", "Montserrat" ] } });
+    fonts.load({ google: { families: [ "Avenir", "Roboto" ] } });
   }
 
   function handleCoverClick() {}
