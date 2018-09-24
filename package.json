@@ -43,6 +43,7 @@
   },
   "dependencies": {
     "object-assign": "^4.1.1",
-    "pixi.js": "^4.3.4"
+    "pixi.js": "^4.3.4",
+    "webfontloader": "^1.6.28"
   }
 }

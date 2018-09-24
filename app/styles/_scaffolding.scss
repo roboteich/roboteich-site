@@ -66,7 +66,7 @@ body {
   bottom:10%;
   left:50%;
   transform:translate3d(-50%, 0, 0);
-  min-width:175px;
+  min-width:262px;
 }
 
 #site-main-body {
@@ -101,18 +101,22 @@ body {
     left:unset;
   }
 
+  #site-main-body {
+    align-items: flex-start;
+    justify-content: left;
+  }
+
   #site-main-heading {
+    position:relative;
+    top:unset;
+    left:unset;
+    transform: unset;
     text-align: left;
-    left:$grid-padding * 3;
-    bottom:$grid-padding * 5;
+    padding:$grid-padding $grid-padding*2;
   }
 
   #site-main {
     height:100%;
-  }
-
-  #site-main-heading {
-    transform:translate3d(0, 33%, 0);
   }
 
   #site-footer {
@@ -141,7 +145,6 @@ body {
 }
 
 #site-main-hero::before {
-  // background-color:$color-secondary;
   display:block;
   position:absolute;
   top:0;
@@ -210,17 +213,17 @@ body {
 
 #social-link-list {
 
-  margin: 28px 12px;
+  margin: 28px 28px;
 
   .btn-social {
     display: block;
     width:32px;
     height:0;
     padding-top:32px;
-    margin:0 8px;
+    margin:0 4px;
     overflow:hidden;
     background: transparent url('../img/social-icons.svg') left top no-repeat;
-    background-size:300% 100%;
+    background-size:500% 100%;
     opacity:.75;
     transition: opacity .45s ease-in-out;
 
@@ -233,10 +236,18 @@ body {
     }
 
     &.btn-social-twitter {
-      background-position:50% top;
+      background-position:25% top;
     }
 
     &.btn-social-instagram {
+      background-position:50% top;
+    }
+
+    &.btn-social-medium {
+      background-position:75% top;
+    }
+
+    &.btn-social-email {
       background-position:100% top;
     }
   }

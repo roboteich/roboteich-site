@@ -2,8 +2,9 @@ html {
   font-size: 10px;
   color: #fff;
 
-  .wf-active {
-    font-family: 'Avenir'
+  &.wf-active {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300
   }
 }
 
@@ -11,15 +12,15 @@ body {
   line-height: 1.45;
 }
 
-p {margin-bottom: 1.3rem;}
-
-h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
-  margin: 1.414rem 0 0.5rem;
+p, .p {
   font-weight: 100;
+  margin-bottom: 1.3rem;
+}
+
+.h2, .h3, .h4 {
+  margin: 1.414rem 0 0.5rem;
+  font-weight: 300;
   line-height: 1;
-  .wf-active & {
-    font-family: 'Roboto';
-  }
 }
 
 h1, .h1 {
@@ -37,9 +38,6 @@ h2, .h2 {font-size: 4.236rem;}
 
 h3, .h3 {
   font-size: 2.618rem;
-  .wf-active {
-    font-family: 'Avenir';
-  }
 }
 
 h4, .h4 {font-size: 1.618rem;}

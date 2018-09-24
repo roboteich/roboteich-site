@@ -177,7 +177,7 @@ gulp.task("browser-sync", function() {
     logConnections: true,
     open: "external",
     server: { baseDir: filePaths.dest.templates },
-    port: process.env.PORT || 9000,
+    port: process.env.PORT || 5000,
     xip: true
   });
 });

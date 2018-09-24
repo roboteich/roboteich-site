@@ -32,7 +32,7 @@ var createReelComponent = require("./components/reel/reel");
   }
 
   function loadFonts() {
-    fonts.load({ google: { families: [ "Avenir", "Roboto" ] } });
+    fonts.load({ google: { families: [ "Lato:100,300" ] } });
   }
 
   function handleCoverClick() {}

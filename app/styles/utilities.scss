@@ -1,0 +1,6 @@
+@include media(">=lg") {
+    .hidden-lg {
+      visibility: hidden;
+      display:none;
+    }
+}
