@@ -22,13 +22,6 @@ function reelFactory(el, instanceOptions) {
       settings = assign({}, defaultOptions, options);
     },
     createChildren: function() {
-      // renderer = PIXI.autoDetectRenderer(
-      //   window.innerWidth,
-      //   window.innerHeight,
-      //   { transparent: true }
-      // );
-      // renderer.autoResize = true;
-      // stage = new PIXI.Container();
       video = e("video")
         .cls("site-reel-video")
         .attr("webkit-playsinline", "")
@@ -39,15 +32,7 @@ function reelFactory(el, instanceOptions) {
         .attr("preload", "auto")
         .attr("muted", "");
 
-      // texture = PIXI.Texture.fromVideoUrl(settings.reelSrc);
-      // videoSprite = new PIXI.Sprite(texture);
-      // videoSprite.width = renderer.width;
-      // videoSprite.height = renderer.height;
-      //
-      // stage.addChild(videoSprite);
       this.getEl().appendChild(video.el());
-
-      video.attr("src", settings.reelSrc);
     },
     draw: function() {
       var videoEl = video.el();
@@ -57,10 +42,13 @@ function reelFactory(el, instanceOptions) {
         "," +
         scale +
         ",1)";
-
-      console.log("draw");
     },
-    didDraw: function() {},
+    didDraw: function() {
+      if(playing && !video.el().playing){
+        video.attr("src", settings.reelSrc);
+      }
+    },
+
     ready: function() {
       var videoUpdateAction = handleVideoUpdate.bind(this);
       video.el().addEventListener("ended", handleVideoEnd.bind(this));
