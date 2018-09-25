@@ -1,17 +1,11 @@
 "use strict";
 var component = require("../../core/component");
 var assign = require("object-assign");
-var helpers = require("../../core/helpers");
-var e = helpers.e;
 
-var defaultOptions = { reelSrc: "/video/project-reel.mp4", scaleMode: "cover" };
+var defaultOptions = { reelSrc: "/video/project-reel.mp4" };
 
 function reelFactory(el, instanceOptions) {
   var settings;
-  var renderer;
-  var state;
-  var texture;
-  var videoSprite;
   var video;
   var playing = false;
   var videoUpdateAction;
@@ -22,20 +16,10 @@ function reelFactory(el, instanceOptions) {
       settings = assign({}, defaultOptions, options);
     },
     createChildren: function() {
-      video = e("video")
-        .cls("site-reel-video")
-        .attr("webkit-playsinline", "")
-        .attr("width", 1280)
-        .attr("height", 720)
-        .attr("playsinline", "")
-        .attr("autoplay", "")
-        .attr("preload", "auto")
-        .attr("muted", "");
-
-      this.getEl().appendChild(video.el());
+      video = this.getEl().getElementsByClassName("site-reel-video")[0];
     },
     draw: function() {
-      var videoEl = video.el();
+      var videoEl = video;
       var el = this.getEl();
       var scale = Math.max(el.offsetWidth / 1280, el.offsetHeight / 720);
       videoEl.style.transform = "translate3d(-50%, -50%, 0) scale3d(" + scale +
@@ -44,15 +28,15 @@ function reelFactory(el, instanceOptions) {
         ",1)";
     },
     didDraw: function() {
-      if(playing && !video.el().playing){
-        video.attr("src", settings.reelSrc);
+      if(playing && !video.playing){
+        video.src = settings.reelSrc;
       }
     },
 
     ready: function() {
       var videoUpdateAction = handleVideoUpdate.bind(this);
-      video.el().addEventListener("ended", handleVideoEnd.bind(this));
-      video.el().addEventListener("timeupdate", videoUpdateAction);
+      video.addEventListener("ended", handleVideoEnd.bind(this));
+      video.addEventListener("timeupdate", videoUpdateAction);
 
       if (this.getProps().autoplay) {
         this.play();
@@ -75,13 +59,13 @@ function reelFactory(el, instanceOptions) {
     this.invalidate();
   }
 
-  function handleVideoEnd(e) {
-    video.el().currentTime = 0;
-    video.el().play();
+  function handleVideoEnd() {
+    video.currentTime = 0;
+    video.play();
   }
 
-  function handleVideoUpdate(e) {
-    var videoEl = video.el();
+  function handleVideoUpdate() {
+    var videoEl = video;
     if (videoEl.currentTime > 0) {
       videoEl.removeEventListener("timeupdate", videoUpdateAction);
       videoEl.classList.add("active");
